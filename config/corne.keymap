@@ -1,0 +1,64 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+#define BASE 0
+#define NAV  1
+#define SYM  2
+#define FUN  3
+
+/*
+ * Port of crkbd.layout.json for the 42-key, 6-column Corne layout.
+ * Bindings follow the Corne matrix-transform order: each row from left to
+ * right, followed by the left and right thumb clusters.
+ * The source VIA backup has six non-physical KC_NO padding slots; they are
+ * deliberately omitted here.
+ *
+ * FN_MO13 and FN_MO23 are inferred as the momentary NAV and SYM layers.
+ * The VIA export contains no binding that activates FUN.
+ */
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        base_layer {
+            display-name = "Base";
+            bindings = <
+                &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P    &kp BSPC
+                &kp LSHFT &kp A     &kp S     &kp D     &kp F     &kp G     &kp H     &kp J     &kp K     &kp L     &kp SEMI &kp APOS
+                &kp LCTRL &kp Z     &kp X     &kp C     &kp V     &kp B     &kp N     &kp M     &kp COMMA &kp DOT   &kp SLASH &kp ESC
+                &kp LGUI  &mo NAV   &kp SPACE  &kp ENTER &mo SYM   &kp RGUI
+            >;
+        };
+
+        nav_layer {
+            display-name = "Nav";
+            bindings = <
+                &kp TAB   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
+                &kp LSHFT &none     &kp HOME  &kp PG_DN &kp PG_UP &kp END   &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT &none     &kp CAPS
+                &kp LCTRL &none     &none     &none     &none     &none     &none     &none     &none     &none     &none     &kp DEL
+                &kp LGUI  &trans    &kp SPACE &kp ENTER &trans    &kp RGUI
+            >;
+        };
+
+        sym_layer {
+            display-name = "Sym";
+            bindings = <
+                &kp TAB   &kp LS(N1) &kp LS(N2) &kp LS(N3) &kp LS(N4) &kp LS(N5) &kp LS(N6) &kp LS(N7) &kp LS(N8) &kp LS(N9) &kp LS(N0) &kp BSPC
+                &kp LCTRL &kp CAPS   &kp HOME   &kp PG_UP   &kp PG_DN   &kp END    &kp MINUS  &kp EQUAL  &kp LBKT   &kp RBKT   &kp BSLH   &kp GRAVE
+                &kp LSHFT &none      &none      &none       &none       &none      &kp UNDER  &kp PLUS   &kp LBRC   &kp RBRC   &kp PIPE   &kp TILDE
+                &kp LGUI  &trans     &kp SPACE  &kp ENTER   &trans      &kp RALT
+            >;
+        };
+
+        fun_layer {
+            display-name = "Fun";
+            bindings = <
+                &bootloader &kp F1  &kp F2  &kp F3  &kp F4  &kp F5     &kp F6  &kp F7  &kp F8  &kp F9  &kp F10 &kp F11
+                &none       &none   &none   &none   &none   &none      &none   &none   &none   &none   &none   &kp F12
+                &none       &none   &none   &none   &none   &kp K_MENU &none   &none   &none   &none   &none   &none
+                &kp LGUI    &trans  &kp SPACE &kp ENTER &trans &kp RALT
+            >;
+        };
+    };
+};
